@@ -1,0 +1,38 @@
+2. Attaching a Domain Name to Your Hosting
+
+To attach a domain name to your Node.js website hosted on Hostinger, you will need to update your DNS settings and configure your server to handle requests to your domain.
+
+Step-by-Step Guide:
+
+Purchase a Domain Name:
+If you haven’t done this yet, you can buy a domain name from Hostinger (they have an integrated domain registration service), or any other domain provider like GoDaddy, Namecheap, etc.
+
+Configure DNS Records:
+
+Once you have your domain, you need to set up DNS records that point to your server’s IP address.
+
+Log in to your Hostinger account (or the domain provider where you purchased the domain).
+
+Find the DNS settings (it might be labeled as "DNS Management" or "Manage DNS").
+
+Set the A record:
+
+Create or edit an A record for your domain (e.g., www.yourdomain.com or yourdomain.com).
+
+Set the value of the A record to the public IP address of your server (you can find this in the Hostinger control panel or ask Hostinger support).
+
+Example:
+
+Host: @ (for the root domain)
+
+Type: A
+
+Value: 123.45.67.89 (replace with your actual server IP)
+
+Set Up Your Web Server:
+
+Now that your domain points to your server, you'll need to set up a reverse proxy or a web server like Nginx or Apache to forward incoming traffic to your Node.js application.
+
+Here’s how to set up Nginx as a reverse proxy:
+
+Install Nginx (if not already installed):
