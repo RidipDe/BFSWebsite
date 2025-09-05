@@ -268,7 +268,7 @@ const HomePage: React.FC = () => {
             <HighlightCard>
               <FaHeart className="icon" />
               <h3>Years of Heritage</h3>
-              <div className="stat">5+</div>
+              <div className="stat">3+</div>
               <p>Years of preserving Bengali culture in Seattle</p>
             </HighlightCard>
           </HighlightsGrid>

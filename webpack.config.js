@@ -8,36 +8,41 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/'
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
+  },
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|tsx)$/,
         use: 'ts-loader',
         exclude: /node_modules/
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
         type: 'asset/resource'
       }
     ]
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-    alias: {
-      '@': path.resolve(__dirname, 'src')
-    }
-  },
-  devServer: {
-    historyApiFallback: true,
-    static: {
-      directory: path.join(__dirname, 'public')
-    },
-    port: 3002,
-    open: true
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html'
     })
-  ]
+  ],
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    open: true,
+    port: 3002,
+    allowedHosts: [
+      'bengalifriendsofseattle.org',
+      'www.bengalifriendsofseattle.org',
+      'localhost',
+      '127.0.0.1'
+    ],
+    host: '0.0.0.0',
+    client: {
+      webSocketURL: 'auto://0.0.0.0:0/ws'
+    }
+  }
 };

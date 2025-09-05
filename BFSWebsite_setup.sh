@@ -5,39 +5,40 @@
 #Add the following line to run the script at every reboot and at fixed times:
 #
 
-[Unit]
-Description=BFS Update Script
-After=network.target
+# [Unit]
+# Description=BFS Update Script
+# After=network.target
 
-[Service]
-ExecStart=/bin/bash /root/BFSWebsite_setup.sh
-WorkingDirectory=/
-Restart=on-failure
-User=root
+# [Service]
+# ExecStart=/bin/bash /root/BFSWebsite_setup.sh
+# WorkingDirectory=/
+# Restart=on-failure
+# User=root
 
-[Install]
-WantedBy=multi-user.target
-
-
-[Unit]
-Description=Run BFS Update Script
-
-[Timer]
-OnBootSec=1min        # Start 1 minute after boot
-OnUnitActiveSec=24h   # Run every 24 hours (this will be overridden by individual time settings)
-OnCalendar=*-*-* 02:00:00
-OnCalendar=*-*-* 14:00:00
-OnCalendar=*-*-* 18:00:00
-
-[Install]
-WantedBy=timers.target
+# [Install]
+# WantedBy=multi-user.target
 
 
-# Run every hour on the hour
-0 * * * * /bin/bash /root/BFSWebsite_setup.sh
+# [Unit]
+# Description=Run BFS Update Script
 
-# Run after reboot
-@reboot /bin/bash /root/BFSWebsite_setup.sh
+# [Timer]
+# OnBootSec=1min        # Start 1 minute after boot
+# OnUnitActiveSec=24h   # Run every 24 hours (this will be overridden by individual time settings)
+# OnCalendar=*-*-* 02:00:00
+# OnCalendar=*-*-* 14:00:00
+# OnCalendar=*-*-* 18:00:00
+
+# [Install]
+# WantedBy=timers.target
+
+# sudo vim /var/spool/cron/crontabs/root
+
+# # Run every hour on the hour
+# 0 * * * * /bin/bash /root/BFSWebsite_setup.sh
+
+# # Run after reboot
+# @reboot /bin/bash /root/BFSWebsite_setup.sh
 
 
 

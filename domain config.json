@@ -1,0 +1,29 @@
+# HTTP Configuration (Port 80)
+server {
+    listen 80;
+    server_name bengalifriendsofseattle.org www.bengalifriendsofseattle.org;
+
+    # Redirect HTTP to HTTPS (301 Permanent Redirect)
+    return 301 https://bengalifriendsofseattle.org$request_uri;
+}
+
+# HTTPS Configuration (Port 443)
+server {
+    listen 443 ssl;
+    server_name bengalifriendsofseattle.org www.bengalifriendsofseattle.org;
+
+    ssl_certificate /etc/letsencrypt/live/bengalifriendsofseattle.org/fullchain.pem;  # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/bengalifriendsofseattle.org/privkey.pem;  # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf;  # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;  # managed by Certbot
+
+    # Proxy Node.js Application
+    location / {
+        proxy_pass http://127.0.0.1:3002;  # Assuming your Node.js app runs on port 3000
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
