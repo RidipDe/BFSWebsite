@@ -129,7 +129,7 @@ const ContactPage: React.FC = () => {
             </li>
             <li>
               <span>📱</span>
-              <span>+1 (206) XXX-XXXX</span>
+              <span>+1 (814) 431-0391</span>
             </li>
             <li>
               <span>📍</span>
