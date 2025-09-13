@@ -33,7 +33,7 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
-              <Route path="/gallery" element={<GalleryPage />} />
+              {/* <Route path="/gallery" element={<GalleryPage />} /> */}
               <Route path="/gallery/directories" element={<DirectoryGalleryPage />} />
               <Route path="/events" element={<EventsPage />} />
               <Route path="/contact" element={<ContactPage />} />

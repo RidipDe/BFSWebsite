@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
         <Logo to="/">Bengali Friends of Seattle</Logo>
         <NavLinks>
           <NavLink to="/about">About</NavLink>
-          <NavLink to="/gallery">Gallery</NavLink>
+          <NavLink to="/gallery/directories">Gallery</NavLink>
           <NavLink to="/events">Events</NavLink>
           <NavLink to="/contact">Contact</NavLink>
         </NavLinks>
