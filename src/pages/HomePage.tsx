@@ -306,11 +306,11 @@ const HomePage: React.FC = () => {
               </EventDetails>
             </div>
             <EventButtons>
-              <Button href="/events/durga-puja-2025" className="secondary">
+              {/* <Button href="/events/durga-puja-2025" className="secondary">
                 More Information
-              </Button>
-              <Button href="https://forms.example.com/durga-puja-2025" className="primary" target="_blank" rel="noopener noreferrer">
-                Register Now
+              </Button> */}
+              <Button href="/contact" className="primary" target="_blank" rel="noopener noreferrer">
+                More Information
               </Button>
             </EventButtons>
           </EventContent>

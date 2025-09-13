@@ -145,7 +145,7 @@ const ContactPage: React.FC = () => {
           </ul>
         </ContactInfo>
 
-        <ContactForm onSubmit={handleSubmit}>
+        {/* <ContactForm onSubmit={handleSubmit}>
           <FormGroup>
             <label htmlFor="name">Name</label>
             <input
@@ -194,7 +194,7 @@ const ContactPage: React.FC = () => {
           </FormGroup>
 
           <SubmitButton type="submit">Send Message</SubmitButton>
-        </ContactForm>
+        </ContactForm> */}
       </ContactGrid>
     </ContactContainer>
   );

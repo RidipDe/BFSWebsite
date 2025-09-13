@@ -85,26 +85,26 @@ const upcomingEvents: Event[] = [
   {
     id: 1,
     title: 'Durga Puja 2025',
-    date: 'October 20-24, 2025',
-    location: 'Redmond Community Center',
+    date: 'September 26-28, 2025',
+    location: 'Veda Temple, Redmond, WA',
     description: 'Join us for the grand celebration of Durga Puja with traditional rituals, cultural programs, and Bengali cuisine.',
     image: '/images/placeholder.svg'
   },
   {
     id: 2,
     title: 'Saraswati Puja 2026',
-    date: 'February 14, 2026',
-    location: 'Bellevue Community Center',
+    date: 'TBD',
+    location: 'TBD',
     description: 'Annual celebration of Saraswati Puja with traditional prayers, cultural performances, and community gathering.',
-    image: '/images/placeholder.svg'
+    image: ''
   },
   {
     id: 3,
-    title: 'Summer Picnic 2025',
-    date: 'July 15, 2025',
-    location: 'Marymoor Park, Redmond',
+    title: 'Summer Picnic 2026',
+    date: 'TBD',
+    location: 'TBD',
     description: 'Annual summer picnic with outdoor games, Bengali food, and fun activities for the whole family.',
-    image: '/images/placeholder.svg'
+    image: ''
   }
 ];
 
