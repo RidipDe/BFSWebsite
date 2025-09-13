@@ -136,22 +136,27 @@ const DirectoryGalleryPage: React.FC = () => {
   const [directories, setDirectories] = useState<{
     [key: string]: { name: string; images: string[] }
   }>({
-    'festivals/durga-puja': {
-      name: 'Durga Puja',
-      images: ['/images/festivals/durga-puja/DurgaPujaFlyer.jpeg']
+    'Durga Puja 2025': {
+      name: 'Durga Puja 2025',
+      images: ['/images/Gallery/Durga Puja 2025/1.jpg']
     },
-    'cultural/independence-day': {
-      name: 'Independence Day',
+    'Kobi Pronaam 2025': {
+      name: 'Kobi Pronaam 2025',
       images: [
-        '/images/cultural/independence-day/independence-day-2025.png',
-        '/images/cultural/independence-day/independence-day-2025-2.png'
+        '/images/Gallery/Kobi Pronaam 2025/1.jpg',
+        '/images/Gallery/Kobi Pronaam 2025/2.jpg',
+        '/images/Gallery/Kobi Pronaam 2025/3.jpg',
+        '/images/Gallery/Kobi Pronaam 2025/4.jpg'
       ]
     },
-    'community': {
-      name: 'Community',
+    'Independence Day Parade 2025': {
+      name: 'Independence Day Parade 2025',
       images: [
-        '/images/community/wb.png',
-        '/images/community/wb2-.png'
+        '/images/Gallery/Independence Day Parade 2025/1.png',
+        '/images/Gallery/Independence Day Parade 2025/2.jpg',
+        '/images/Gallery/Independence Day Parade 2025/3.jpg',
+        '/images/Gallery/Independence Day Parade 2025/4.jpg',
+        '/images/Gallery/Independence Day Parade 2025/5.jpg'
       ]
     }
   });
