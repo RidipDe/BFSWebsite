@@ -50,6 +50,7 @@ const Navbar: React.FC = () => {
           <NavLink to="/gallery/directories">Gallery</NavLink>
           <NavLink to="/events">Events</NavLink>
           <NavLink to="/contact">Contact</NavLink>
+          <NavLink to="/donate">Donate</NavLink>
         </NavLinks>
       </NavContainer>
     </Nav>
