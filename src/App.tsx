@@ -10,6 +10,7 @@ import DirectoryGalleryPage from './pages/DirectoryGalleryPage';
 import EventsPage from './pages/EventsPage';
 import ContactPage from './pages/ContactPage';
 import DonationPage from './pages/DonationPage';
+import CommunityPartnersPage from './pages/CommunityPartnersPage';
 import { theme } from './styles/theme';
 import GlobalStyle from './styles/theme';
 
@@ -39,6 +40,7 @@ const App: React.FC = () => {
               <Route path="/events" element={<EventsPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/donate" element={<DonationPage />} />
+              <Route path="/partners" element={<CommunityPartnersPage />} />
             </Routes>
           </MainContent>
           <Footer />
