@@ -84,7 +84,7 @@ interface Event {
 const upcomingEvents: Event[] = [
   {
     id: 2,
-    title: 'Saraswati Puja 2026 - contact for tickets',
+    title: 'Saraswati Bani Bandana 2026 - contact for tickets',
     date: '24th January, 2026',
     location: 'Saibaba Temple (18109 NE 76th St UNIT 108, Redmond, WA 98052)',
     description: 'Annual celebration of Saraswati Puja with traditional prayers, cultural performances, and community gathering.',
@@ -128,7 +128,7 @@ const pastEvents: Event[] = [
   },
   {
     id: 103,
-    title: 'Durgotsav, Bani Bandana 2025',
+    title: 'Durgotsav 2025',
     date: 'September, 2025',
     location: 'Veda Temple, Redmond, WA',
     description: 'Last year\'s Durga Puja highlights and community moments.',
