@@ -275,7 +275,7 @@ const HomePage: React.FC = () => {
         </HighlightsContainer>
       </HighlightsSection>
       
-      <FeaturedEvents>
+      {/* <FeaturedEvents>
         <h2>Featured Event</h2>
         <FeaturedEventCard>
           <EventImage>
@@ -308,14 +308,14 @@ const HomePage: React.FC = () => {
             <EventButtons>
               {/* <Button href="/events/durga-puja-2025" className="secondary">
                 More Information
-              </Button> */}
+              </Button>        }
               <Button href="/contact" className="primary" target="_blank" rel="noopener noreferrer">
                 More Information
               </Button>
             </EventButtons>
           </EventContent>
         </FeaturedEventCard>
-      </FeaturedEvents>
+      </FeaturedEvents> */}
     </div>
   );
 };

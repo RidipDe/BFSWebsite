@@ -83,18 +83,10 @@ interface Event {
 
 const upcomingEvents: Event[] = [
   {
-    id: 1,
-    title: 'Durga Puja 2025',
-    date: 'September 26-28, 2025',
-    location: 'Veda Temple, Redmond, WA',
-    description: 'Join us for the grand celebration of Durga Puja with traditional rituals, cultural programs, and Bengali cuisine.',
-    image: '/images/placeholder.svg'
-  },
-  {
     id: 2,
-    title: 'Saraswati Puja 2026',
-    date: 'TBD',
-    location: 'TBD',
+    title: 'Saraswati Puja 2026 - contact for tickets',
+    date: '24th January, 2026',
+    location: 'Saibaba Temple (18109 NE 76th St UNIT 108, Redmond, WA 98052)',
     description: 'Annual celebration of Saraswati Puja with traditional prayers, cultural performances, and community gathering.',
     image: ''
   },
@@ -105,6 +97,42 @@ const upcomingEvents: Event[] = [
     location: 'TBD',
     description: 'Annual summer picnic with outdoor games, Bengali food, and fun activities for the whole family.',
     image: ''
+  },
+  {
+    id: 3,
+    title: 'Kobi Pronaam 2026',
+    date: 'TBD',
+    location: 'TBD',
+    description: 'Annual cultural program featuring Bengali poetry, music, and dance performances.',
+    image: ''
+  }
+];
+
+// Past events list
+const pastEvents: Event[] = [
+  {
+    id: 101,
+    title: 'Independence Day Parade 2025',
+    date: 'August 15, 2025',
+    location: 'Seattle, WA',
+    description: 'A joyful parade celebrating Independence Day with community floats and performances.',
+    image: '/images/independence-day-2025.png'
+  },
+  {
+    id: 102,
+    title: 'Kobi Pronaam 2025',
+    date: 'June 14, 2025',
+    location: 'Seattle Center',
+    description: 'A cultural evening celebrating Bengali poets and performers.',
+    image: '/images/Gallery/Kobi Pronaam 2025/1.jpg'
+  },
+  {
+    id: 103,
+    title: 'Durgotsav, Bani Bandana 2025',
+    date: 'September, 2025',
+    location: 'Veda Temple, Redmond, WA',
+    description: 'Last year\'s Durga Puja highlights and community moments.',
+    image: '/images/Gallery/Durga Puja 2025/1.jpg'
   }
 ];
 
@@ -116,7 +144,7 @@ const EventsPage: React.FC = () => {
       <EventsGrid>
         {upcomingEvents.map(event => (
           <EventCard key={event.id}>
-            <img src={event.image} alt={event.title} />
+            <img src={event.image || '/images/placeholder.svg'} alt={event.title} />
             <EventContent>
               <h3>{event.title}</h3>
               <EventDetails>
@@ -127,6 +155,26 @@ const EventsPage: React.FC = () => {
               </EventDetails>
               <p>{event.description}</p>
               <RegisterButton>Register Now</RegisterButton>
+            </EventContent>
+          </EventCard>
+        ))}
+      </EventsGrid>
+
+      {/* Past events section */}
+      <Heading style={{ marginTop: '3rem' }}>Past Events</Heading>
+      <EventsGrid>
+        {pastEvents.map(event => (
+          <EventCard key={event.id}>
+            <img src={event.image || '/images/placeholder.svg'} alt={event.title} />
+            <EventContent>
+              <h3>{event.title}</h3>
+              <EventDetails>
+                <span>📅 {event.date}</span>
+              </EventDetails>
+              <EventDetails>
+                <span>📍 {event.location}</span>
+              </EventDetails>
+              <p>{event.description}</p>
             </EventContent>
           </EventCard>
         ))}
