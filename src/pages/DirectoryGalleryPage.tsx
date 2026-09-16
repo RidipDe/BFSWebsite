@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import ImageDialog from '../components/ImageDialog';
 import { theme } from '../styles/theme';
 
 const GalleryContainer = styled.div`
   max-width: 1200px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   margin: 0 auto;
-  padding: 4rem 1rem;
+  padding: clamp(2rem, 6vw, 4rem) 1rem;
 `;
 
 const Heading = styled.h2`
@@ -16,124 +20,82 @@ const Heading = styled.h2`
 
 const PhotoGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   gap: 1.5rem;
 `;
 
-const PhotoCard = styled.div`
+const PhotoCard = styled.button`
   position: relative;
+  min-width: 0;
+  width: 100%;
+  padding: 0;
+  border: none;
+  font: inherit;
+  background: none;
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   cursor: pointer;
-  &:hover {
-    .overlay {
+  touch-action: manipulation;
+
+  &:focus-visible {
+    outline: 3px solid ${theme.colors.primary};
+    outline-offset: 3px;
+  }
+
+  @media (min-width: 769px) and (hover: hover) and (pointer: fine) {
+    &:hover .overlay,
+    &:focus-visible .overlay {
       opacity: 1;
     }
   }
+
   img {
     width: 100%;
-    height: 300px;
+    height: clamp(220px, 65vw, 300px);
     object-fit: cover;
     display: block;
   }
 `;
 
-const PhotoOverlay = styled.div.attrs({ className: 'overlay' })`
+const PhotoOverlay = styled.span.attrs({ className: 'overlay' })`
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  left: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,0.7);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s ease;
   color: white;
   text-align: center;
   padding: 1rem;
-  h3 {
-    margin-bottom: 0.5rem;
-  }
+  overflow-wrap: anywhere;
+
   small {
     font-size: 0.8rem;
     margin-top: 0.3rem;
   }
-`;
 
-const Modal = styled.div<{ isOpen: boolean }>`
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0, 0, 0, 0.9);
-  display: ${props => (props.isOpen ? 'flex' : 'none')};
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 20px;
-  flex-direction: column;
-`;
+  @media (min-width: 769px) and (hover: hover) and (pointer: fine) {
+    top: 0;
+    opacity: 0;
+  }
 
-const ModalContent = styled.div`
-  position: relative;
-  max-width: 90vw;
-  max-height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 `;
 
-const CloseButton = styled.button`
-  position: absolute;
-  top: -40px;
-  right: 0;
-  background: none;
-  border: none;
-  color: ${theme.colors.secondary};
-  font-size: 28px;
-  cursor: pointer;
-  padding: 8px;
-  &:hover {
-    color: ${theme.colors.primary};
-  }
-`;
-
-const NavigationWrapper = styled.div`
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-`;
-
-const NavButton = styled.button<{ disabled: boolean }>`
-  background-color: ${props => (props.disabled ? '#aaaaaa' : '#e91e63')};
-  border: none;
-  border-radius: 50%;
-  color: white;
-  font-size: 30px;
-  padding: 8px 16px;
-  cursor: ${props => (props.disabled ? 'default' : 'pointer')};
-  pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
-  user-select: none;
-  transition: background-color 0.3s ease;
-  &:hover {
-    background-color: ${props => (props.disabled ? '#aaaaaa' : '#d81557')};
-  }
-`;
-
-const ImageCaption = styled.div`
-  color: ${theme.colors.secondary};
-  text-align: center;
-  margin-top: 10px;
-  font-size: 1.1rem;
+const PhotoName = styled.span`
+  font-size: 1.17em;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 `;
 
 const DirectoryGalleryPage: React.FC = () => {
-  const [directories, setDirectories] = useState<{
+  const [directories] = useState<{
     [key: string]: { name: string; images: string[] }
   }>({
     'Durga Puja 2025': {
@@ -178,74 +140,46 @@ const DirectoryGalleryPage: React.FC = () => {
     setCurrentIndex(i => (i < images.length - 1 ? i + 1 : i));
   };
 
-  // Keyboard navigation for modal
-  useEffect(() => {
-    if (!selectedDirectory) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') {
-        handlePrev();
-      } else if (e.key === 'ArrowRight') {
-        handleNext();
-      } else if (e.key === 'Escape') {
-        handleCloseModal();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [selectedDirectory]);
-
   return (
     <GalleryContainer>
       <Heading>Directory Photo Gallery</Heading>
       <PhotoGrid>
         {Object.entries(directories).map(([dirPath, { name, images }]) => (
-          <PhotoCard key={dirPath} onClick={() => setSelectedDirectory(dirPath)}>
+          <PhotoCard
+            key={dirPath}
+            type="button"
+            aria-haspopup="dialog"
+            aria-label={`Open ${name} photos`}
+            onClick={event => {
+              event.currentTarget.focus({ preventScroll: true });
+              setCurrentIndex(0);
+              setSelectedDirectory(dirPath);
+            }}
+          >
             <img src={images[0]} alt={name} />
             <PhotoOverlay>
-              <h3>{name}</h3>
+              <PhotoName>{name}</PhotoName>
               <small>{images.length} photos</small>
             </PhotoOverlay>
           </PhotoCard>
         ))}
       </PhotoGrid>
 
-      <Modal isOpen={!!selectedDirectory}>
-        {selectedDirectory && (
-          <>
-            <CloseButton onClick={handleCloseModal} aria-label="Close modal">×</CloseButton>
-
-            <ModalContent>
-              <img
-                src={directories[selectedDirectory].images[currentIndex]}
-                alt={`${directories[selectedDirectory].name} ${currentIndex + 1}`}
-              />
-            </ModalContent>
-
-            <ImageCaption>
-              {directories[selectedDirectory].name} ({currentIndex + 1}/{directories[selectedDirectory].images.length})
-            </ImageCaption>
-
-            <NavigationWrapper>
-              <NavButton
-                onClick={handlePrev}
-                disabled={currentIndex === 0}
-                aria-label="Previous photo"
-              >
-                ‹
-              </NavButton>
-              <NavButton
-                onClick={handleNext}
-                disabled={currentIndex === directories[selectedDirectory].images.length - 1}
-                aria-label="Next photo"
-              >
-                ›
-              </NavButton>
-            </NavigationWrapper>
-          </>
-        )}
-      </Modal>
+      {selectedDirectory && (
+        <ImageDialog
+          src={directories[selectedDirectory].images[currentIndex]}
+          alt={`${directories[selectedDirectory].name} ${currentIndex + 1}`}
+          caption={`${directories[selectedDirectory].name} (${currentIndex + 1}/${directories[selectedDirectory].images.length})`}
+          label="Directory photo gallery"
+          previousLabel="Previous photo"
+          nextLabel="Next photo"
+          hasPrevious={currentIndex > 0}
+          hasNext={currentIndex < directories[selectedDirectory].images.length - 1}
+          onPrevious={handlePrev}
+          onNext={handleNext}
+          onClose={handleCloseModal}
+        />
+      )}
     </GalleryContainer>
   );
 };

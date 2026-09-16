@@ -8,18 +8,20 @@ const FooterContainer = styled.footer`
   color: ${theme.colors.fontText};
   padding: 2rem 0;
   margin-top: auto;
+  padding-bottom: max(2rem, env(safe-area-inset-bottom, 0px));
 `;
 
 const FooterContent = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
   padding: 0 1rem;
 `;
 
 const FooterSection = styled.div`
+  min-width: 0;
   h3 {
     color: ${theme.colors.secondaryDark};
     margin-bottom: 1rem;
@@ -28,11 +30,15 @@ const FooterSection = styled.div`
 
 const SocialLinks = styled.div`
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
   
   a {
     color: #fff;
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     
     &:hover {
       color: #e91e63;

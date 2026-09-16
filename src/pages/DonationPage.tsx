@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const DonationContainer = styled.div`
   max-width: 800px;
   margin: 2rem auto;
-  padding: 2rem;
+  padding: clamp(1rem, 4vw, 2rem);
   text-align: center;
 `;
 
@@ -15,7 +15,7 @@ const Title = styled.h1`
 
 const DonationSection = styled.div`
   background: ${props => props.theme.colors.background};
-  padding: 2rem;
+  padding: clamp(1rem, 4vw, 2rem);
   border-radius: 8px;
   margin-bottom: 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -39,6 +39,7 @@ const EmailText = styled.p`
   font-weight: bold;
   color: ${props => props.theme.colors.primary};
   font-size: 1.2rem;
+  overflow-wrap: anywhere;
 `;
 
 const DonationPage: React.FC = () => {

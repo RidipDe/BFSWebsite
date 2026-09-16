@@ -22,6 +22,18 @@ const AppContainer = styled.div`
 
 const MainContent = styled.main`
   flex: 1;
+  min-width: 0;
+`;
+
+const SkipLink = styled.a`
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: ${theme.colors.background};
+  transform: translateY(-200%);
+  &:focus { transform: translateY(0); }
 `;
 
 const App: React.FC = () => {
@@ -30,8 +42,9 @@ const App: React.FC = () => {
       <GlobalStyle />
       <Router>
         <AppContainer>
+          <SkipLink href="#main-content">Skip to content</SkipLink>
           <Navbar />
-          <MainContent>
+          <MainContent id="main-content" tabIndex={-1}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />

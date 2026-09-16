@@ -5,7 +5,7 @@ import { featuredEvent } from '../data/featuredEvent';
 const EventsContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 4rem 1rem;
+  padding: clamp(2rem, 5vw, 4rem) 1rem;
 `;
 
 const Heading = styled.h2`
@@ -16,11 +16,12 @@ const Heading = styled.h2`
 
 const EventsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr));
   gap: 2rem;
 `;
 
 const EventCard = styled.div<{ $poster?: boolean }>`
+  min-width: 0;
   background: white;
   border-radius: 8px;
   overflow: hidden;
@@ -35,15 +36,24 @@ const EventCard = styled.div<{ $poster?: boolean }>`
     width: 100%;
     height: ${props => props.$poster ? 'auto' : '200px'};
     object-fit: ${props => props.$poster ? 'contain' : 'cover'};
+    display: block;
   }
 `;
 
 const EventContent = styled.div`
-  padding: 1.5rem;
+  padding: clamp(1rem, 4vw, 1.5rem);
+  min-width: 0;
 
   h3 {
     color: #e91e63;
     margin-bottom: 1rem;
+  }
+
+  > p > a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 0.5rem;
   }
 `;
 
@@ -60,7 +70,12 @@ const EventDetails = styled.div`
 `;
 
 const RegisterButton = styled.button`
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  max-width: 100%;
+  margin-top: 0.75rem;
   text-decoration: none;
   background-color: #e91e63;
   color: white;

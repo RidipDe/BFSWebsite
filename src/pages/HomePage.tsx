@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { FaHeart, FaUsers, FaCalendarAlt } from 'react-icons/fa';
@@ -8,9 +9,12 @@ import { featuredEvent } from '../data/featuredEvent';
 const HeroSection = styled.section`
   background: linear-gradient(rgba(255, 247, 247, 0.3), rgba(129, 127, 127, 0.6)),
     url('/images/wb2-.png');
-  background-size: cover;
-  background-position: center -20px;
-  height: 120vh;
+  background-size: 100% 100%, cover;
+  background-position: center, center;
+  background-repeat: no-repeat;
+  min-height: min(80vh, 54rem);
+  min-height: min(80svh, 54rem);
+  padding-block: clamp(3rem, 10vh, 6rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,7 +22,9 @@ const HeroSection = styled.section`
   text-align: center;
 `;
 
-const HeroButton = styled.button`
+const HeroButton = styled(Link)`
+  display: inline-block;
+  text-decoration: none;
   background-color: ${theme.colors.primary};
   color: ${theme.colors.fontText};
   border: none;
@@ -28,9 +34,12 @@ const HeroButton = styled.button`
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 1rem;
+  min-height: 44px;
+  max-width: 100%;
 
   &:hover {
     background-color: ${theme.colors.primaryLight};
+    color: ${theme.colors.fontText};
     transform: translateY(-2px);
   }
 `;
@@ -41,20 +50,71 @@ const HeroContent = styled.div`
   text-align: center;
   
   h1 {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.2;
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   }
   
   p {
-    font-size: 1.5rem;
+    font-size: clamp(1.05rem, 3vw, 1.5rem);
     margin-bottom: 2rem;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
   }
 `;
 
+const DiscoverLink = styled.a`
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: min(28rem, calc(100% - 2rem));
+  min-height: 72px;
+  margin: -2rem auto 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid ${theme.colors.secondary};
+  border-radius: 8px;
+  background: ${theme.colors.background};
+  color: ${theme.colors.primaryDark};
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(44, 24, 16, 0.16);
+  transition: border-color 0.2s ease;
+
+  strong { display: block; font-size: 1.05rem; }
+  small { display: block; color: ${theme.colors.textLight}; font-size: 0.875rem; }
+
+  .direction {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: ${theme.colors.secondary};
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &:hover, &:focus-visible {
+    color: ${theme.colors.primaryDark};
+    border-color: ${theme.colors.primary};
+    svg { transform: translateY(4px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:hover svg, &:focus-visible svg { transform: none; }
+  }
+`;
+
 const FeaturedEvents = styled.section`
-  padding: 4rem 1rem;
+  padding: clamp(2rem, 5vw, 4rem) 1rem;
+  padding-top: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
   background-color: ${theme.colors.background};
@@ -67,7 +127,7 @@ const FeaturedEvents = styled.section`
 `;
 
 const HighlightsSection = styled.section`
-  padding: 4rem 1rem;
+  padding: clamp(2rem, 5vw, 4rem) 1rem;
   background-color: ${theme.colors.secondary};
 `;
 
@@ -78,14 +138,15 @@ const HighlightsContainer = styled.div`
 
 const HighlightsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 2rem;
   margin-top: 2rem;
 `;
 
 const HighlightCard = styled.div`
   text-align: center;
-  padding: 2rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  min-width: 0;
   background-color: ${theme.colors.background};
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -128,7 +189,7 @@ const FeaturedEventCard = styled.div`
   max-width: 1200px;
   min-height: 500px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     flex-direction: column;
     height: auto;
   }
@@ -136,6 +197,7 @@ const FeaturedEventCard = styled.div`
 
 const EventImage = styled.div`
   flex: 0 0 45%;
+  min-width: 0;
   position: relative;
   overflow: hidden;
 
@@ -149,7 +211,8 @@ const EventImage = styled.div`
 
 const EventContent = styled.div`
   flex: 1;
-  padding: 3rem;
+  min-width: 0;
+  padding: clamp(1.25rem, 4vw, 3rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -187,6 +250,7 @@ const EventDetails = styled.div`
 
 const EventButtons = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
   margin-top: auto;
   width: 100%;
@@ -198,14 +262,22 @@ const EventButtons = styled.div`
 `;
 
 const Button = styled.a`
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   padding: 1rem 2rem;
   border-radius: 6px;
   text-decoration: none;
   text-align: center;
   transition: all 0.3s ease;
   font-weight: 600;
-  flex: 1;
+  flex: 1 1 11rem;
+
+  @media (max-width: 768px) {
+    flex: 0 0 auto;
+    width: 100%;
+  }
   
   &.primary {
     background-color: ${theme.colors.primary};
@@ -237,12 +309,24 @@ const HomePage: React.FC = () => {
         <HeroContent>
           <h1>Bengali Friends of Seattle</h1>
           <p>Celebrating Bengali Culture in the Pacific Northwest</p>
-          <HeroButton>Join Our Community</HeroButton>
+          <HeroButton to="/contact">Join Our Community</HeroButton>
         </HeroContent>
       </HeroSection>
 
-      <FeaturedEvents id="durgotsav-2026">
-        <h2>Featured Upcoming Event</h2>
+      <DiscoverLink href="#durgotsav-2026">
+        <span>
+          <strong>More to celebrate</strong>
+          <small>Discover Durgotsav below</small>
+        </span>
+        <span className="direction" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 4v16m-6-6 6 6 6-6" />
+          </svg>
+        </span>
+      </DiscoverLink>
+
+      <FeaturedEvents id="durgotsav-2026" tabIndex={-1} aria-labelledby="featured-event-heading">
+        <h2 id="featured-event-heading">Featured Upcoming Event</h2>
         <FeaturedEventCard>
           <EventImage as="a" href={featuredEvent.image} target="_blank" rel="noopener noreferrer" aria-label="View the full Durgotsav Festival poster">
             <img src={featuredEvent.image} alt={featuredEvent.title + ' poster'} width={1010} height={1390} />
