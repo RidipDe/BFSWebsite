@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const ContactContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 4rem 1rem;
+  padding: clamp(2rem, 5vw, 4rem) 1rem;
 `;
 
 const Heading = styled.h2`
@@ -15,14 +15,15 @@ const Heading = styled.h2`
 
 const ContactGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 2rem;
   margin-top: 2rem;
 `;
 
 const ContactInfo = styled.div`
   background: white;
-  padding: 2rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  min-width: 0;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 
@@ -40,6 +41,8 @@ const ContactInfo = styled.div`
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      > * { min-width: 0; }
+      > span:first-child { flex-shrink: 0; }
     }
   }
 `;
