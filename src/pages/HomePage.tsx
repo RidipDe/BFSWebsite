@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { FaHeart, FaUsers, FaCalendarAlt } from 'react-icons/fa';
 import { IoCalendarOutline, IoTimeOutline, IoLocationOutline, IoTicketOutline } from 'react-icons/io5';
+import { featuredEvent } from '../data/featuredEvent';
 
 const HeroSection = styled.section`
   background: linear-gradient(rgba(255, 247, 247, 0.3), rgba(129, 127, 127, 0.6)),
@@ -140,17 +141,9 @@ const EventImage = styled.div`
 
   img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover img {
-    transform: scale(1.05);
-  }
-
-  @media (max-width: 768px) {
-    height: 300px;
+    height: auto;
+    object-fit: contain;
+    display: block;
   }
 `;
 
@@ -185,6 +178,7 @@ const EventDetails = styled.div`
     color: ${theme.colors.text};
 
     svg {
+      flex-shrink: 0;
       margin-right: 0.5rem;
       color: ${theme.colors.primary};
     }
@@ -247,6 +241,35 @@ const HomePage: React.FC = () => {
         </HeroContent>
       </HeroSection>
 
+      <FeaturedEvents id="durgotsav-2026">
+        <h2>Featured Upcoming Event</h2>
+        <FeaturedEventCard>
+          <EventImage as="a" href={featuredEvent.image} target="_blank" rel="noopener noreferrer" aria-label="View the full Durgotsav Festival poster">
+            <img src={featuredEvent.image} alt={featuredEvent.title + ' poster'} width={1010} height={1390} />
+          </EventImage>
+          <EventContent>
+            <div>
+              <EventTitle>{featuredEvent.title}</EventTitle>
+              <EventDescription>{featuredEvent.description}</EventDescription>
+              <EventDetails>
+                <div><IoCalendarOutline aria-hidden="true" /> Date: {featuredEvent.date}</div>
+                <div><IoTimeOutline aria-hidden="true" /> Schedule: {featuredEvent.schedule}</div>
+                <div><IoLocationOutline aria-hidden="true" /> Location: {featuredEvent.location}, {featuredEvent.address}</div>
+                <div><IoTicketOutline aria-hidden="true" /> Entry: Free on all three days</div>
+              </EventDetails>
+            </div>
+            <EventButtons>
+              <Button href={featuredEvent.rsvpUrl} className="primary" target="_blank" rel="noopener noreferrer">
+                RSVP for Free
+              </Button>
+              <Button href={featuredEvent.image} className="secondary" target="_blank" rel="noopener noreferrer">
+                View Full Poster
+              </Button>
+            </EventButtons>
+          </EventContent>
+        </FeaturedEventCard>
+      </FeaturedEvents>
+
       <HighlightsSection>
         <HighlightsContainer>
           <h2 style={{ textAlign: 'center', color: theme.colors.text }}>BFS Community Highlights</h2>
@@ -274,48 +297,6 @@ const HomePage: React.FC = () => {
           </HighlightsGrid>
         </HighlightsContainer>
       </HighlightsSection>
-      
-      {/* <FeaturedEvents>
-        <h2>Featured Event</h2>
-        <FeaturedEventCard>
-          <EventImage>
-            <img src="/images/DurgaPujaFlyer.jpeg" alt="Durga Puja 2025" />
-          </EventImage>
-          <EventContent>
-            <div>
-              <EventTitle>Durga Puja 2025</EventTitle>
-              <EventDescription>
-                Join us for the grand celebration of Durga Puja, the biggest Bengali festival of the year. 
-                Experience three days of spiritual devotion, cultural performances, authentic Bengali cuisine, 
-                and community gatherings. This year's celebration will feature special performances by local 
-                artists, traditional aarti ceremonies, and a grand feast on Vijaya Dashami.
-              </EventDescription>
-              <EventDetails>
-                <div>
-                  <IoCalendarOutline /> Date: September 26-28, 2025
-                </div>
-                <div>
-                  <IoTimeOutline /> Time: 10:00 AM - 10:00 PM
-                </div>
-                <div>
-                  <IoLocationOutline /> Location: Veda Temple, Redmond, WA
-                </div>
-                <div>
-                  <IoTicketOutline /> Entry: Free
-                </div>
-              </EventDetails>
-            </div>
-            <EventButtons>
-              {/* <Button href="/events/durga-puja-2025" className="secondary">
-                More Information
-              </Button>        }
-              <Button href="/contact" className="primary" target="_blank" rel="noopener noreferrer">
-                More Information
-              </Button>
-            </EventButtons>
-          </EventContent>
-        </FeaturedEventCard>
-      </FeaturedEvents> */}
     </div>
   );
 };
