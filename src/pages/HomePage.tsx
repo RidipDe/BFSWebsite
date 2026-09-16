@@ -6,20 +6,70 @@ import { FaHeart, FaUsers, FaCalendarAlt } from 'react-icons/fa';
 import { IoCalendarOutline, IoTimeOutline, IoLocationOutline, IoTicketOutline } from 'react-icons/io5';
 import { featuredEvent } from '../data/featuredEvent';
 
+const heroImage = '/images/wb2-.png';
+const heroFeatherMask = '/images/hero-feather-mask.svg';
+
 const HeroSection = styled.section`
-  background: linear-gradient(rgba(255, 247, 247, 0.3), rgba(129, 127, 127, 0.6)),
-    url('/images/wb2-.png');
-  background-size: 100% 100%, cover;
-  background-position: center, center;
-  background-repeat: no-repeat;
-  min-height: min(80vh, 54rem);
-  min-height: min(80svh, 54rem);
-  padding-block: clamp(3rem, 10vh, 6rem);
-  display: flex;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: ${theme.colors.secondaryDark};
+  min-height: 85vh;
+  min-height: 85svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  justify-content: center;
   color: white;
   text-align: center;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &::before {
+    inset: -12px;
+    z-index: 0;
+    background: url('${heroImage}') center / cover no-repeat;
+    filter: blur(8px);
+  }
+
+  &::after {
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(rgba(255, 247, 247, 0.3), rgba(129, 127, 127, 0.6));
+  }
+`;
+
+const HeroImageSoftEdge = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: url('${heroImage}') center / contain no-repeat;
+  filter: blur(8px);
+  pointer-events: none;
+`;
+
+const HeroImage = styled.img`
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  min-width: 0;
+  pointer-events: none;
+  -webkit-mask-image: url('${heroFeatherMask}');
+  mask-image: url('${heroFeatherMask}');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 `;
 
 const HeroButton = styled(Link)`
@@ -45,8 +95,12 @@ const HeroButton = styled(Link)`
 `;
 
 const HeroContent = styled.div`
+  grid-area: 1 / 1;
+  z-index: 3;
+  justify-self: center;
+  width: 100%;
   max-width: 800px;
-  padding: 0 1rem;
+  padding: clamp(3rem, 10vh, 6rem) 1rem;
   text-align: center;
   
   h1 {
@@ -306,6 +360,8 @@ const HomePage: React.FC = () => {
   return (
     <div>
       <HeroSection>
+        <HeroImageSoftEdge aria-hidden="true" />
+        <HeroImage src={heroImage} alt="" aria-hidden="true" width={1536} height={1024} fetchPriority="high" />
         <HeroContent>
           <h1>Bengali Friends of Seattle</h1>
           <p>Celebrating Bengali Culture in the Pacific Northwest</p>
