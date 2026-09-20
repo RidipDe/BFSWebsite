@@ -417,7 +417,7 @@ const HomePage: React.FC = () => {
             <HighlightCard>
               <FaUsers className="icon" />
               <h3>Growing Community</h3>
-              <div className="stat">100+</div>
+              <div className="stat">300+</div>
               <p>Active Bengali families in the Greater Seattle area</p>
             </HighlightCard>
 
@@ -431,7 +431,7 @@ const HomePage: React.FC = () => {
             <HighlightCard>
               <FaHeart className="icon" />
               <h3>Years of Heritage</h3>
-              <div className="stat">3+</div>
+              <div className="stat">5+</div>
               <p>Years of preserving Bengali culture in Seattle</p>
             </HighlightCard>
           </HighlightsGrid>
